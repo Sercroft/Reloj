@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Reloj by Andrus</title>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="gradient">
+        <h1></h1>
+    </div>
+</body>
+<script type="text/javascript">
+    /* A function that is called every second to update the time. */
+    const currentTimer = () => {
+        const element = document.querySelector("h1")
+        
+        let date = new Date()
+        let hh = date.getHours()
+        let mm = date.getMinutes()
+        let ss = date.getSeconds()
+        let am_pm = hh >= 12 ? ` pm` : `am`
+ 
+        hh = hh < 10 ? `0${hh}` : hh
+        mm = mm < 10 ? `0${mm}` : mm
+        ss = ss < 10 ? `0${ss}` : ss
+
+        let time = `${hh} : ${mm} : ${ss} ${am_pm}`
+        element.innerText = time
+    }
+    currentTimer()
+    setInterval(currentTimer, 1000)
+    /*****************************************************/
+    let cursor = document.querySelector(".cursor")
+
+    const moveCursor = (e) => {
+        cursor.style.left = `${e.pageX}px`
+        cursor.style.top = `${e.pageY}px`
+    }
+
+    /* Adding a pulse to the cursor when the mouse is clicked. */
+    const addPulse = () => {
+        cursor.classList.toggle('active')
+    }
+
+    window.addEventListener('mousemove', moveCursor)
+    window.addEventListener('mousedown', addPulse)
+    window.addEventListener('mouseup', addPulse)
+</script>
+</html>
